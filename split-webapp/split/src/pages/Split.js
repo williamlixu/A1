@@ -60,10 +60,12 @@ class Split extends Component {
     const paymentArray = [];
 
     usersArray.forEach(user => {
-      paymentArray.push({
-        person: user,
-        amount: perPersonCost
-      });
+      if(user !== transaction.payed) {
+        paymentArray.push({
+          person: user,
+          amount: perPersonCost
+        }); 
+      }
     });
 
     const bill = {
@@ -74,6 +76,8 @@ class Split extends Component {
     };
 
     this.createBill(bill);
+
+    this.props.history.push("/home/transactions")
   }
 
   createBill(data) {
